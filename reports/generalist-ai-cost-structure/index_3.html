@@ -1,0 +1,1039 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Generalist AI: cost structure, market and commercial strategy. Sections 1 and 2 — working draft. Berkeley Technology Review.">
+<meta name="author" content="Jack Tianxi Yang, Zachary Cameron Golik">
+<title>Selling Robotics Intelligence</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --color-ground: #FDFCF9;
+  --color-surface: #FFFFFF;
+  --color-ink: #111111;
+  --color-muted: #6B6B68;
+  --color-rule: #E7E5DD;
+  --color-track: #EEEDE6;
+  --color-compare: #B7B5AC;
+  --color-blue: #003262;
+  --color-gold: #FDB515;
+
+  --font-display: "Libre Caslon Display", Georgia, serif;
+  --font-body: "Libre Caslon Text", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --pad: 56px;
+  --measure: 680px;
+  --wide: 940px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--color-ground);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--color-compare);
+  text-underline-offset: 4px;
+}
+a:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 3px; }
+
+/* ---------- shell ---------- */
+
+.shell {
+  padding-inline: var(--pad);
+  padding-block: 0;
+  max-width: calc(var(--wide) + var(--pad) * 2);
+  margin: 0 auto;
+}
+
+.col { max-width: var(--measure); }
+.col-wide { max-width: var(--wide); }
+
+/* ---------- masthead ---------- */
+
+.masthead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  padding-block: 26px 16px;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 19px;
+  letter-spacing: 0.005em;
+}
+
+.btr-mark { display: inline-flex; gap: 3px; }
+.btr-mark__dot { width: 7px; height: 7px; border-radius: 50%; }
+.btr-mark__dot--blue { background: var(--color-blue); }
+.btr-mark__dot--gold { background: var(--color-gold); }
+
+/* ---------- type utilities ---------- */
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.caption {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 46px;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  margin: 0;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 33px;
+  line-height: 1.12;
+  text-wrap: balance;
+  margin: 0;
+}
+
+h3 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.35;
+  margin: 0;
+}
+
+p { margin: 0; }
+
+.dek {
+  font-size: 19px;
+  line-height: 1.45;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.lede::first-letter {
+  font-family: var(--font-display);
+  float: left;
+  font-size: 58px;
+  line-height: 0.82;
+  padding: 6px 9px 0 0;
+}
+
+em.term { font-style: italic; }
+
+/* ---------- article header ---------- */
+
+.article-head {
+  padding-block: 44px 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.byline {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-rule);
+}
+.byline-names { font-size: 16px; }
+
+.edition-note {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0;
+  border: 1px solid var(--color-rule);
+  background: var(--color-surface);
+}
+.edition-note > div {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.edition-note > div + div { border-left: 1px solid var(--color-rule); }
+.edition-note p:last-child { font-size: 15px; }
+
+/* ---------- sections ---------- */
+
+.section {
+  padding-block: 30px;
+  border-top: 1px solid var(--color-rule);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.prose {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: var(--measure);
+}
+
+/* ---------- figures ---------- */
+
+figure {
+  margin: 0;
+  max-width: var(--wide);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.figure-frame {
+  border: 1px solid var(--color-rule);
+  background: var(--color-surface);
+  padding: 30px 32px 28px;
+}
+
+figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: var(--measure);
+}
+
+svg { display: block; max-width: 100%; height: auto; }
+
+/* five-word sequence */
+
+.seq {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1px;
+  background: var(--color-rule);
+  border: 1px solid var(--color-rule);
+}
+.seq > li {
+  list-style: none;
+  background: var(--color-surface);
+  padding: 20px 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 168px;
+}
+.seq-n {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--color-muted);
+}
+.seq-word {
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1.1;
+}
+.seq-gloss { font-size: 14px; line-height: 1.45; color: var(--color-muted); }
+
+/* three machines */
+
+.machines {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 26px;
+}
+.machine { display: flex; flex-direction: column; gap: 12px; }
+.machine-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.machine-note { font-size: 14px; line-height: 1.45; }
+
+/* ---------- technical aside ---------- */
+
+.aside-panel {
+  border: 1px solid var(--color-rule);
+  background: var(--color-surface);
+  padding: 30px 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: var(--wide);
+}
+.aside-panel .prose { max-width: 100%; }
+.aside-panel .prose p { max-width: var(--measure); }
+
+/* ---------- table ---------- */
+
+.table-scroll { overflow-x: auto; max-width: var(--wide); }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 480px;
+  font-size: 15px;
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 14px 18px 14px 0;
+  border-bottom: 1px solid var(--color-rule);
+}
+thead th {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  padding-bottom: 10px;
+}
+tbody tr:last-child td { border-bottom: 0; }
+td:first-child, th:first-child { width: 30%; }
+
+/* ---------- contents / forthcoming ---------- */
+
+.contents { display: flex; flex-direction: column; max-width: var(--wide); }
+.contents-row {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 118px;
+  gap: 18px;
+  padding-block: 16px;
+  border-top: 1px solid var(--color-rule);
+  align-items: baseline;
+}
+.contents-row:last-child { border-bottom: 1px solid var(--color-rule); }
+.contents-n {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
+.contents-body { display: flex; flex-direction: column; gap: 5px; }
+.contents-title { font-family: var(--font-display); font-size: 20px; line-height: 1.2; }
+.contents-scope { font-size: 14px; color: var(--color-muted); line-height: 1.45; }
+.contents-state {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  text-align: right;
+}
+
+/* ---------- standards ---------- */
+
+.standards { display: flex; flex-direction: column; max-width: var(--wide); }
+.standard {
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr);
+  gap: 24px;
+  padding-block: 20px;
+  border-top: 1px solid var(--color-rule);
+}
+.standard:last-child { border-bottom: 1px solid var(--color-rule); }
+.standard dt {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  padding-top: 3px;
+}
+.standard dd { margin: 0; max-width: var(--measure); }
+
+.pullquote {
+  font-family: var(--font-display);
+  font-size: 27px;
+  line-height: 1.22;
+  max-width: var(--measure);
+  text-wrap: balance;
+  margin: 0;
+}
+
+/* ---------- notes ---------- */
+
+.notes { display: flex; flex-direction: column; max-width: var(--wide); }
+.note {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 14px;
+  padding-block: 12px;
+  border-top: 1px solid var(--color-rule);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.note:last-child { border-bottom: 1px solid var(--color-rule); }
+.note-n {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+  padding-top: 3px;
+}
+sup a { text-decoration: none; font-family: var(--font-mono); font-size: 10px; }
+
+.tk {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--color-muted);
+  border: 1px solid var(--color-rule);
+  padding: 1px 5px;
+  white-space: nowrap;
+}
+
+/* ---------- footer ---------- */
+
+.page-foot {
+  border-top: 1px solid var(--color-rule);
+  padding-block: 24px 48px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 30px;
+  justify-content: space-between;
+}
+
+/* ---------- narrow ---------- */
+
+@media (max-width: 720px) {
+  :root { --pad: 20px; }
+  h1 { font-size: 34px; }
+  h2 { font-size: 27px; }
+  .dek { font-size: 17px; }
+  .pullquote { font-size: 22px; }
+  .lede::first-letter { font-size: 46px; }
+  .standard { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .contents-row { grid-template-columns: 30px minmax(0, 1fr); }
+  .contents-state { grid-column: 2; text-align: left; }
+  .edition-note > div + div { border-left: 0; border-top: 1px solid var(--color-rule); }
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <header class="masthead">
+    <span class="wordmark">
+      Berkeley Technology Review
+      <span class="btr-mark" aria-hidden="true">
+        <span class="btr-mark__dot btr-mark__dot--blue"></span>
+        <span class="btr-mark__dot btr-mark__dot--gold"></span>
+      </span>
+    </span>
+    <p class="kicker">Working draft &middot; September 2026</p>
+  </header>
+
+  <article>
+
+    <div class="article-head col-wide">
+      <p class="kicker">Report 01 &middot; First edition &mdash; non-technical</p>
+      <h1>What does it cost to sell robotics intelligence?</h1>
+      <p class="dek col">Generalist AI: cost structure, market and commercial strategy.</p>
+      <div class="byline col">
+        <p class="byline-names">Jack Tianxi Yang and Zachary Cameron Golik</p>
+        <p class="caption">University of California, Berkeley</p>
+      </div>
+    </div>
+
+    <div class="edition-note col-wide" style="margin-bottom:30px">
+      <div>
+        <p class="kicker">First edition</p>
+        <p>Written for a non-technical reader. The aim is intuition: every idea is introduced in plain language before it is named.</p>
+      </div>
+      <div>
+        <p class="kicker">Second edition</p>
+        <p>Written for a technical reader. The aim is precision and defensibility: the same claims, stated so they can be checked.</p>
+      </div>
+    </div>
+
+    <!-- ============ 1. EXECUTIVE SUMMARY ============ -->
+
+    <section class="section">
+      <div class="section-head col">
+        <p class="kicker">Section 1</p>
+        <h2>Executive summary</h2>
+      </div>
+      <div class="prose">
+        <p class="lede">Generalist AI, Inc. aims to solve the problem of the time and cost friction associated with programming robots for specific tasks.</p>
+        <p>Their solution is an embodied foundation model that allows robots to rapidly learn new behaviours and accomplish a wide set of tasks &mdash; even tasks that were not explicitly programmed into the robot a priori. <span class="tk">GEN-1.5 citation TK</span></p>
+      </div>
+    </section>
+
+    <!-- ============ 2. TECHNOLOGY ============ -->
+
+    <section class="section">
+      <div class="section-head col">
+        <p class="kicker">Section 2</p>
+        <h2>Technology</h2>
+      </div>
+
+      <div class="prose">
+        <p>An <em class="term">embodied foundation model</em> refers to a model, trained on a broad spectrum of data, to be generally intelligent (&ldquo;foundation&rdquo;) in the context of perceiving, reasoning about and acting on our physical world (&ldquo;embodied&rdquo;).</p>
+        <p>There are five words worth giving intuition to, in order.</p>
+      </div>
+
+      <figure>
+        <div class="figure-frame">
+          <ol class="seq">
+            <li>
+              <span class="seq-n">01</span>
+              <span class="seq-word">Model</span>
+              <span class="seq-gloss">A machine that takes something in and spits something out.</span>
+            </li>
+            <li>
+              <span class="seq-n">02</span>
+              <span class="seq-word">Trained</span>
+              <span class="seq-gloss">Turning the machine&rsquo;s knobs, by recipe, until it behaves better.</span>
+            </li>
+            <li>
+              <span class="seq-n">03</span>
+              <span class="seq-word">Data</span>
+              <span class="seq-gloss">What the machine is turned against. Its shape decides what can be learned.</span>
+            </li>
+            <li>
+              <span class="seq-n">04</span>
+              <span class="seq-word">Intelligent</span>
+              <span class="seq-gloss">How well it does the thing &mdash; and how we agreed to measure that.</span>
+            </li>
+            <li>
+              <span class="seq-n">05</span>
+              <span class="seq-word">Embodied</span>
+              <span class="seq-gloss">The machine has a body, and the body is in the world.</span>
+            </li>
+          </ol>
+        </div>
+        <figcaption>
+          <p class="caption">Figure 1. The five words, in the order the argument needs them.</p>
+        </figcaption>
+      </figure>
+
+      <div class="prose">
+        <p>A model is a machine that takes something in and spits something out. It takes as input a state of the world &mdash; for example a bundle of data that includes video captured from a camera, audio captured from a microphone, and sensor readings captured from a gripper, all timestamped so they correspond to each other &mdash; and outputs a set of actions that a robot might take. One can think of this machine as having many knobs, or <em class="term">weights</em>, that affect how the machine reacts to certain inputs.</p>
+        <p>We are interested in this machine reacting in ways that are productive. Consider three machines given the task of slicing a cucumber.</p>
+      </div>
+
+      <figure>
+        <div class="figure-frame">
+          <div class="machines">
+
+            <div class="machine">
+              <svg viewBox="0 0 220 118" role="img" aria-label="Machine A: a cucumber divided into eight even slices.">
+                <rect x="18" y="46" width="184" height="26" rx="13" fill="none" stroke="#111111" stroke-width="1.5"/>
+                <g stroke="#111111" stroke-width="1.5">
+                  <line x1="41" y1="46" x2="41" y2="72"/>
+                  <line x1="64" y1="46" x2="64" y2="72"/>
+                  <line x1="87" y1="46" x2="87" y2="72"/>
+                  <line x1="110" y1="46" x2="110" y2="72"/>
+                  <line x1="133" y1="46" x2="133" y2="72"/>
+                  <line x1="156" y1="46" x2="156" y2="72"/>
+                  <line x1="179" y1="46" x2="179" y2="72"/>
+                </g>
+                <g stroke="#6B6B68" stroke-width="1" stroke-dasharray="3 3">
+                  <line x1="18" y1="92" x2="202" y2="92"/>
+                </g>
+                <line x1="18" y1="88" x2="18" y2="96" stroke="#6B6B68" stroke-width="1"/>
+                <line x1="202" y1="88" x2="202" y2="96" stroke="#6B6B68" stroke-width="1"/>
+                <text x="110" y="110" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#6B6B68">EVEN</text>
+                <path d="M 150 14 L 168 28" stroke="#111111" stroke-width="1.5" fill="none"/>
+                <path d="M 168 28 L 176 22 L 158 8 Z" fill="#EEEDE6" stroke="#111111" stroke-width="1.5" stroke-linejoin="round"/>
+              </svg>
+              <span class="machine-label">Machine A</span>
+              <p class="machine-note">Quickly picks up the knife by its handle and dexterously cuts the cucumber into uniform slices.</p>
+            </div>
+
+            <div class="machine">
+              <svg viewBox="0 0 220 118" role="img" aria-label="Machine B: an uncut cucumber struck with the knife handle.">
+                <rect x="18" y="46" width="184" height="26" rx="13" fill="none" stroke="#111111" stroke-width="1.5"/>
+                <path d="M 96 40 l 7 -9 l -3 10 l 10 -6 l -7 9" fill="none" stroke="#111111" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M 124 40 l 7 -9 l -3 10 l 10 -6 l -7 9" fill="none" stroke="#111111" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M 96 56 q 12 8 24 0 q 12 -8 24 0" fill="none" stroke="#B7B5AC" stroke-width="1.5"/>
+                <g stroke="#6B6B68" stroke-width="1" stroke-dasharray="3 3">
+                  <line x1="18" y1="92" x2="202" y2="92"/>
+                </g>
+                <line x1="18" y1="88" x2="18" y2="96" stroke="#6B6B68" stroke-width="1"/>
+                <line x1="202" y1="88" x2="202" y2="96" stroke="#6B6B68" stroke-width="1"/>
+                <text x="110" y="110" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#6B6B68">UNCUT</text>
+                <path d="M 150 14 L 168 28" stroke="#111111" stroke-width="1.5" fill="none"/>
+                <path d="M 150 14 L 142 20 L 160 34 L 168 28 Z" fill="#EEEDE6" stroke="#111111" stroke-width="1.5" stroke-linejoin="round"/>
+              </svg>
+              <span class="machine-label">Machine B</span>
+              <p class="machine-note">Looks at the knife, decides to pick it up by the blade, and whacks the handle against the vegetable.</p>
+            </div>
+
+            <div class="machine">
+              <svg viewBox="0 0 220 118" role="img" aria-label="Machine C: a cucumber cut into uneven, irregular pieces.">
+                <rect x="18" y="46" width="184" height="26" rx="13" fill="none" stroke="#111111" stroke-width="1.5"/>
+                <g stroke="#111111" stroke-width="1.5">
+                  <line x1="34" y1="46" x2="39" y2="72"/>
+                  <line x1="58" y1="46" x2="52" y2="72"/>
+                  <line x1="95" y1="46" x2="99" y2="72"/>
+                  <line x1="108" y1="46" x2="104" y2="72"/>
+                  <line x1="146" y1="46" x2="153" y2="72"/>
+                  <line x1="184" y1="46" x2="179" y2="72"/>
+                </g>
+                <g stroke="#6B6B68" stroke-width="1" stroke-dasharray="3 3">
+                  <line x1="18" y1="92" x2="202" y2="92"/>
+                </g>
+                <line x1="18" y1="88" x2="18" y2="96" stroke="#6B6B68" stroke-width="1"/>
+                <line x1="202" y1="88" x2="202" y2="96" stroke="#6B6B68" stroke-width="1"/>
+                <text x="110" y="110" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#6B6B68">UNEVEN</text>
+                <path d="M 150 14 L 168 28" stroke="#111111" stroke-width="1.5" fill="none"/>
+                <path d="M 168 28 L 176 22 L 158 8 Z" fill="#EEEDE6" stroke="#111111" stroke-width="1.5" stroke-linejoin="round"/>
+              </svg>
+              <span class="machine-label">Machine C</span>
+              <p class="machine-note">Picks up the knife properly but fumbles, dicing the cucumber in odd ways. Not as bad as flailing a sharp object around &mdash; but not optimal.</p>
+            </div>
+
+          </div>
+        </div>
+        <figcaption>
+          <p class="caption">Figure 2. Three machines, one task. Schematic; not a record of any particular system&rsquo;s output.</p>
+        </figcaption>
+      </figure>
+
+      <div class="prose">
+        <p>The natural idea is to see whether we can train our machine to act like Machine A.</p>
+        <p>The key insight is that this machine has many knobs, or weights, that can be tuned &mdash; <em class="term">trained</em> &mdash; by some set of instructions, a recipe, so that our final machine will act more like Machine A. But do we know which knobs to tune? These models have billions of parameters, or knobs. It seems really hard, and expensive.</p>
+        <p>Luckily, we have a class of algorithms called <em class="term">optimizers</em>. You may have heard of gradient descent. One can think of an optimizer as a recipe that takes a score we calculated &mdash; a score measuring how unhappy we are with the model&rsquo;s performance on the tasks we chose to evaluate it on &mdash; and returns instructions, by way of the chain rule, for how to tune every weight in the model to improve. Follow the recipe many times, and the model generally does better on the measure of performance we set. Each pass is called an iteration.</p>
+        <p>Unluckily, this is still expensive.<sup><a href="#note-1" id="ref-1">1</a></sup></p>
+      </div>
+
+      <figure>
+        <div class="figure-frame">
+          <svg viewBox="0 0 620 214" role="img" aria-label="A schematic loss landscape: two starting points descend into two different local minima.">
+            <line x1="20" y1="196" x2="600" y2="196" stroke="#EEEDE6" stroke-width="1"/>
+            <path d="M 20 42 C 88 34, 108 146, 172 152 C 228 157, 248 74, 308 84 C 368 94, 378 170, 448 174 C 518 178, 540 82, 600 46"
+                  fill="none" stroke="#111111" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M 26 46 C 80 46, 104 140, 166 150" fill="none" stroke="#6B6B68" stroke-width="1" stroke-dasharray="3 4"/>
+            <path d="M 594 50 C 542 54, 518 168, 454 173" fill="none" stroke="#6B6B68" stroke-width="1" stroke-dasharray="3 4"/>
+            <circle cx="26" cy="42" r="4.5" fill="#B7B5AC" stroke="#111111" stroke-width="1.2"/>
+            <circle cx="594" cy="46" r="4.5" fill="#B7B5AC" stroke="#111111" stroke-width="1.2"/>
+            <circle cx="172" cy="152" r="5" fill="#111111"/>
+            <circle cx="448" cy="174" r="5" fill="#111111"/>
+            <line x1="172" y1="158" x2="172" y2="182" stroke="#6B6B68" stroke-width="1"/>
+            <line x1="448" y1="180" x2="448" y2="182" stroke="#6B6B68" stroke-width="1"/>
+            <text x="172" y="194" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1" fill="#6B6B68">LOCAL MINIMUM</text>
+            <text x="448" y="194" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1" fill="#6B6B68">ANOTHER ONE</text>
+            <text x="26" y="26" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1" fill="#6B6B68">START</text>
+            <text x="594" y="30" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1" fill="#6B6B68">START</text>
+            <text x="20" y="112" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1" fill="#6B6B68" transform="rotate(-90 20 112)">LOSS</text>
+          </svg>
+        </div>
+        <figcaption>
+          <p class="caption">Figure 3. The loss landscape, as a topographic map. Pour water from different points and it runs downhill to different resting places. The act of flowing down is what updates the knobs. Schematic &mdash; the curve carries no data.</p>
+        </figcaption>
+      </figure>
+
+      <div class="prose">
+        <p>The key differentiator between everything previously mentioned and Generalist &mdash; and the other physical-AI foundation model companies &mdash; is that they are concerned with building models that interact with the real world. Contrast this with Claude and GPT, which deal, in the words of Peter Thiel, with the world of bits as opposed to the world of atoms.<sup><a href="#note-2" id="ref-2">2</a></sup> It means their AI must act as the brain of something that exists in the physical world, embodied. In this case the body chosen is a robot, because <span class="tk">TK</span></p>
+      </div>
+
+      <!-- technical aside -->
+
+      <div class="aside-panel">
+        <div class="section-head">
+          <p class="kicker">For the technically inclined</p>
+          <h3>The same section, stated in the vocabulary of the field</h3>
+        </div>
+
+        <div class="prose">
+          <p>Machine learning follows a predictable pattern.</p>
+          <p>A model is a universal function approximator. If a function is any set of input&ndash;output relationships, then the problem of intelligently navigating through reality can be viewed as a massively multidimensional distribution to be learned. Historically this is done by defining a notion of loss &mdash; cross-entropy, for instance &mdash; and executing an optimization algorithm such as Adam<sup><a href="#note-3" id="ref-3">3</a></sup> that iteratively adjusts parameters on what can be thought of as a loss landscape, so as to minimize that loss. Figure 3 is that landscape.</p>
+          <p>There are many model architectures, and the choice of one carries an <em class="term">inductive bias</em>: the set of assumptions the architecture makes about the problem, which should make it easier to solve.</p>
+        </div>
+
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Architecture</th>
+                <th scope="col">Assumption it builds in</th>
+                <th scope="col">What that buys</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Convolutional network (CNN)</td>
+                <td>Spatial locality &mdash; pixels close to each other are closely related.</td>
+                <td>Strong performance on images, where the assumption happens to be true.</td>
+              </tr>
+              <tr>
+                <td>Transformer</td>
+                <td>Through attention: every token can be related to every other token, with no prior statement of which relationships matter.</td>
+                <td>Which relationships matter is learned rather than assumed &mdash; a low inductive bias, and so a wide range of tasks.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prose">
+          <p>The transformer<sup><a href="#note-4" id="ref-4">4</a></sup> turns out to be great for two reasons: hardware compatibility with the units of compute, GPUs, that were most available at the outset of the generative-AI boom; and low inductive bias.</p>
+          <p>The first rests on an empirical observation &mdash; that scaling laws can be exploited. Scaling laws are an architecture-agnostic phenomenon: as you scale up compute and data, performance improves predictably.<sup><a href="#note-5" id="ref-5">5</a></sup> Later work found that compute-optimal training scales model size and training tokens in roughly equal proportion &mdash; a doubling of parameters should correspond to a doubling of training tokens.<sup><a href="#note-6" id="ref-6">6</a></sup> All of this while exploiting the parallel processing capabilities of the GPUs NVIDIA was shipping at the time.</p>
+          <p>The second means transformer architectures can be adapted, with minimal effort, to many different tasks &mdash; including the task of deciding what set of actions to take given data perceived from the world, such as the video and audio a robot receives.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. MARKET SEGMENTATION ============ -->
+
+    <section class="section">
+      <div class="section-head col">
+        <p class="kicker">Section 4</p>
+        <h2>Market segmentation</h2>
+      </div>
+
+      <div class="prose">
+        <p class="lede">Generalist has not made robots capable of everything at a high level. It has made the cost of training them for unique tasks approach zero. This is an important distinction, and decides where the company can add strong value.</p>
+        <p>In our view, the strongest value-add is in high-mix, low-stakes work &mdash; work where the tasks are unique and mistakes are cheap. Pushing error rates down to near those of a human doing the same task is currently technologically unrealistic. Thus, the cost of a mistake must be low enough to justify the savings on training and labour.</p>
+      </div>
+
+      <div class="prose">
+        <p>To put some framework for where Generalist can add value or create gaps: the customer is a plant director, a CFO, an operations manager. The user is an operator working beside the machine. They want things which are fundamentally different. The customer wants to reduce costs and increase efficiency and throughput. The user wants easier shifts.</p>
+        <p>In classical automation there is a third party: the engineer. The engineer programs the machine, and nobody on the floor has to participate in training. Generalist has both the advantage and the curse of removing this engineer from the picture. This benefits the customer, as they no longer have to pay for an engineer. It runs directly against the interests of the operator, who is training a device built entirely to replace them.</p>
+      </div>
+
+      <figure>
+        <div class="figure-frame">
+          <div class="machines">
+
+            <div class="machine">
+              <svg viewBox="0 0 230 185" role="img" aria-label="Classical automation: the customer pays an engineer, who programs the machine. The operator is not connected to the machine.">
+                <rect x="60" y="8" width="110" height="24" fill="none" stroke="#111111" stroke-width="1.5"/>
+                <text x="115" y="24" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#111111">CUSTOMER</text>
+                <line x1="115" y1="32" x2="115" y2="46" stroke="#111111" stroke-width="1.5"/>
+                <path d="M 111 46 L 119 46 L 115 52 Z" fill="#111111"/>
+                <rect x="60" y="52" width="110" height="24" fill="none" stroke="#111111" stroke-width="1.5"/>
+                <text x="115" y="68" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#111111">ENGINEER</text>
+                <line x1="115" y1="76" x2="115" y2="90" stroke="#111111" stroke-width="1.5"/>
+                <path d="M 111 90 L 119 90 L 115 96 Z" fill="#111111"/>
+                <rect x="60" y="96" width="110" height="24" fill="none" stroke="#111111" stroke-width="1.5"/>
+                <text x="115" y="112" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#111111">MACHINE</text>
+                <line x1="115" y1="120" x2="115" y2="138" stroke="#6B6B68" stroke-width="1" stroke-dasharray="3 3"/>
+                <g stroke="#6B6B68" stroke-width="1.2">
+                  <line x1="110" y1="124" x2="120" y2="134"/>
+                  <line x1="120" y1="124" x2="110" y2="134"/>
+                </g>
+                <rect x="60" y="144" width="110" height="24" fill="none" stroke="#B7B5AC" stroke-width="1.5"/>
+                <text x="115" y="160" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#6B6B68">OPERATOR</text>
+              </svg>
+              <span class="machine-label">Classical automation</span>
+              <p class="machine-note">The engineer programs the machine. Nobody on the floor has to participate in training.</p>
+            </div>
+
+            <div class="machine">
+              <svg viewBox="0 0 230 185" role="img" aria-label="With an embodied foundation model: the engineer is removed, and the operator now demonstrates the task to the machine.">
+                <rect x="60" y="8" width="110" height="24" fill="none" stroke="#111111" stroke-width="1.5"/>
+                <text x="115" y="24" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#111111">CUSTOMER</text>
+                <path d="M 60 20 H 38 V 108 H 54" fill="none" stroke="#111111" stroke-width="1.5"/>
+                <path d="M 54 104 L 54 112 L 60 108 Z" fill="#111111"/>
+                <rect x="60" y="52" width="110" height="24" fill="none" stroke="#B7B5AC" stroke-width="1.5" stroke-dasharray="3 3"/>
+                <text x="115" y="68" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#B7B5AC">ENGINEER</text>
+                <line x1="64" y1="74" x2="166" y2="54" stroke="#B7B5AC" stroke-width="1.2"/>
+                <rect x="60" y="96" width="110" height="24" fill="none" stroke="#111111" stroke-width="1.5"/>
+                <text x="115" y="112" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#111111">MACHINE</text>
+                <line x1="115" y1="144" x2="115" y2="126" stroke="#111111" stroke-width="1.5"/>
+                <path d="M 111 126 L 119 126 L 115 120 Z" fill="#111111"/>
+                <text x="124" y="136" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="8" letter-spacing="1" fill="#6B6B68">TRAINS</text>
+                <rect x="60" y="144" width="110" height="24" fill="none" stroke="#111111" stroke-width="1.5"/>
+                <text x="115" y="160" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#111111">OPERATOR</text>
+              </svg>
+              <span class="machine-label">With a foundation model</span>
+              <p class="machine-note">The engineer is removed. The customer stops paying for one, and the operator starts training the device built to replace them.</p>
+            </div>
+
+          </div>
+        </div>
+        <figcaption>
+          <p class="caption">Figure 4. Who has to participate in training. Schematic.</p>
+        </figcaption>
+      </figure>
+
+      <div class="prose">
+        <p>This gap is widest in skilled, unionized trades where the workforce is stable. In roles like food service or reverse logistics the gap narrows, as annual turnover is quite high and people lack the standing or tenure to resist Generalist. In fact, this gap even runs backwards in labs. No scientists enjoy pipetting, so the issue is not with the operator, it is the high cost of mistakes.</p>
+      </div>
+
+      <figure>
+        <div class="figure-frame">
+          <svg viewBox="0 0 620 156" role="img" aria-label="The width of the gap between user and customer need, widest in skilled unionised trades, narrowing in food service and reverse logistics, and reversing in labs.">
+            <path d="M 40 26 L 500 84 L 40 84 Z" fill="#EEEDE6"/>
+            <path d="M 500 84 L 580 104 L 580 84 Z" fill="#EEEDE6"/>
+            <line x1="40" y1="84" x2="580" y2="84" stroke="#6B6B68" stroke-width="1"/>
+            <path d="M 40 26 L 500 84" fill="none" stroke="#111111" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M 500 84 L 580 104" fill="none" stroke="#111111" stroke-width="1.6" stroke-linecap="round"/>
+            <line x1="500" y1="58" x2="500" y2="104" stroke="#6B6B68" stroke-width="1" stroke-dasharray="3 3"/>
+            <text x="500" y="50" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#6B6B68">GAP CLOSES</text>
+            <text x="46" y="20" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#6B6B68">WIDEST</text>
+            <line x1="100" y1="84" x2="100" y2="94" stroke="#6B6B68" stroke-width="1"/>
+            <text x="100" y="110" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#6B6B68">SKILLED, UNIONIZED</text>
+            <text x="100" y="124" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#6B6B68">TRADES</text>
+            <line x1="330" y1="84" x2="330" y2="94" stroke="#6B6B68" stroke-width="1"/>
+            <text x="330" y="110" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#6B6B68">FOOD SERVICE,</text>
+            <text x="330" y="124" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#6B6B68">REVERSE LOGISTICS</text>
+            <text x="556" y="124" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#6B6B68">LABS</text>
+            <text x="22" y="66" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#6B6B68" transform="rotate(-90 22 66)">WIDTH OF GAP</text>
+          </svg>
+        </div>
+        <figcaption>
+          <p class="caption">Figure 5. Where the gap between what the user wants and what the customer wants runs wide, narrow, and backwards. Schematic &mdash; the curve carries no data.</p>
+        </figcaption>
+      </figure>
+
+      <div class="prose">
+        <p>Six rows follow. Each is a job, named in the setting it is done in.</p>
+      </div>
+
+      <figure>
+        <div class="figure-frame">
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Segment</th>
+                  <th scope="col">Urgency</th>
+                  <th scope="col">Perceived need</th>
+                  <th scope="col">Market size</th>
+                  <th scope="col">Access</th>
+                  <th scope="col">Ecosystem</th>
+                  <th scope="col">Complexity</th>
+                  <th scope="col">Technical risk</th>
+                  <th scope="col">Need gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Returns triage<br><span class="caption">3PL reverse-logistics center</span></td>
+                  <td>High</td><td>Medium</td><td>Medium</td><td>High</td><td>Medium</td><td>Low</td><td>Low</td>
+                  <td>Narrow</td>
+                </tr>
+                <tr>
+                  <td>Device refurb<br><span class="caption">Consumer-electronics service depot</span></td>
+                  <td>Medium</td><td>Low</td><td>Low</td><td>High</td><td>Medium</td><td>Medium</td><td>Medium</td>
+                  <td>Narrow</td>
+                </tr>
+                <tr>
+                  <td>Fry station and prep<br><span class="caption">QSR franchise</span></td>
+                  <td>High</td><td>High</td><td>Medium</td><td>Medium</td><td>Low</td><td>Medium</td><td>Medium</td>
+                  <td>Narrow</td>
+                </tr>
+                <tr>
+                  <td>Kitting and rework<br><span class="caption">Tier-1 automotive supplier</span></td>
+                  <td>Medium</td><td>High</td><td>High</td><td>Low</td><td>High</td><td>High</td><td>High</td>
+                  <td>Wide</td>
+                </tr>
+                <tr>
+                  <td>High-mix assembly<br><span class="caption">Contract electronics manufacturer</span></td>
+                  <td>High</td><td>High</td><td>High</td><td>Low</td><td>High</td><td>High</td><td>High</td>
+                  <td>Medium</td>
+                </tr>
+                <tr>
+                  <td>Bench prep<br><span class="caption">Research lab</span></td>
+                  <td>Low</td><td>Medium</td><td>Low</td><td>Medium</td><td>Low</td><td>High</td><td>High</td>
+                  <td>Reversed</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <figcaption>
+          <p class="caption">Figure 6. The screening grid. Dimensions are those set out in the contents. The direction of merit differs by column: high urgency is favourable, high technical risk is not. A working pass, and a matter of judgement rather than reported fact. <span class="tk">Scores under review</span></p>
+        </figcaption>
+      </figure>
+
+      <div class="section-head col">
+        <p class="kicker">One exclusion</p>
+        <h3>Homes</h3>
+      </div>
+
+      <div class="prose">
+        <p>Homes are worth touching on because Generalist names them, among the settings its models are meant for. <span class="tk">Citation TK</span></p>
+        <p>They are a clear case of Generalist failing on one side only. No environment contains more variety than a house, so on the uniqueness of the task a home scores as well as anything could. But the cost of a mistake is unbounded, and it cannot be priced: a child, a pet, a stove left on. Against the test set out above &mdash; that the cost of a mistake must be low enough to justify the savings on training and labour &mdash; the home fails, in my eyes, and it fails on the most decisive half of this equation.</p>
+      </div>
+    </section>
+
+    <!-- ============ FORTHCOMING ============ -->
+
+    <section class="section">
+      <div class="section-head col">
+        <p class="kicker">Sections 3, 5 &ndash; 9</p>
+        <h2>What the rest of this report will do</h2>
+        <p class="dek">Understanding the five terms, we formalize Generalist&rsquo;s current approach along each dimension, and ask how that approach differs from what is seen in academia and industry. From there the report moves to cost, market and strategy.</p>
+      </div>
+
+      <div class="contents">
+        <div class="contents-row">
+          <span class="contents-n">03</span>
+          <div class="contents-body">
+            <span class="contents-title">Cost stack</span>
+            <span class="contents-scope">Having established what Generalist builds, map it to a cost structure &mdash; presented dynamically and interactively, with every assumption stated where one is made.</span>
+          </div>
+          <span class="contents-state">Forthcoming</span>
+        </div>
+        <div class="contents-row">
+          <span class="contents-n">05</span>
+          <div class="contents-body">
+            <span class="contents-title">Likely deal structures</span>
+            <span class="contents-scope">For each segment identified, a hypothesized deal structure and its alternatives. A matter of opinion, and labelled as such.</span>
+          </div>
+          <span class="contents-state">Forthcoming</span>
+        </div>
+        <div class="contents-row">
+          <span class="contents-n">06</span>
+          <div class="contents-body">
+            <span class="contents-title">Financial model</span>
+            <span class="contents-scope">Models for Generalist AI and for Physical Intelligence, released as downloadable spreadsheets and as an interactive version on this page.</span>
+          </div>
+          <span class="contents-state">Forthcoming</span>
+        </div>
+        <div class="contents-row">
+          <span class="contents-n">07</span>
+          <div class="contents-body">
+            <span class="contents-title">Competitive landscape</span>
+            <span class="contents-scope">A broad assessment of competitors &mdash; where they are orthogonal and where they are similar &mdash; with reference to technology and observable go-to-market strategy.</span>
+          </div>
+          <span class="contents-state">Forthcoming</span>
+        </div>
+        <div class="contents-row">
+          <span class="contents-n">08</span>
+          <div class="contents-body">
+            <span class="contents-title">Open questions</span>
+            <span class="contents-scope">Where the work is unsettled, and what would settle it.</span>
+          </div>
+          <span class="contents-state">Forthcoming</span>
+        </div>
+        <div class="contents-row">
+          <span class="contents-n">09</span>
+          <div class="contents-body">
+            <span class="contents-title">Appendix and repository</span>
+            <span class="contents-scope">All sources given. The data analysis behind the competitive landscape and financial model runs in a public repository.</span>
+          </div>
+          <span class="contents-state">Forthcoming</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ NOTES ============ -->
+
+    <section class="section">
+      <div class="section-head col">
+        <p class="kicker">Notes and sources</p>
+        <h2>References</h2>
+      </div>
+      <div class="notes">
+        <div class="note" id="note-1">
+          <span class="note-n">1</span>
+          <span>On the scale of compute devoted to pre-training. <span class="tk">Citation TK &mdash; pick one durable source rather than a news cycle</span></span>
+        </div>
+        <div class="note" id="note-2">
+          <span class="note-n">2</span>
+          <span>The &ldquo;world of bits versus world of atoms&rdquo; framing is Peter Thiel&rsquo;s. <span class="tk">Citation TK &mdash; original talk or text</span></span>
+        </div>
+        <div class="note" id="note-3">
+          <span class="note-n">3</span>
+          <span>Kingma, D. P. and Ba, J. &ldquo;Adam: A Method for Stochastic Optimization.&rdquo; 2014. <a href="https://arxiv.org/abs/1412.6980">arXiv:1412.6980</a></span>
+        </div>
+        <div class="note" id="note-4">
+          <span class="note-n">4</span>
+          <span>Vaswani, A. et al. &ldquo;Attention Is All You Need.&rdquo; 2017. <a href="https://arxiv.org/abs/1706.03762">arXiv:1706.03762</a></span>
+        </div>
+        <div class="note" id="note-5">
+          <span class="note-n">5</span>
+          <span>Kaplan, J. et al. &ldquo;Scaling Laws for Neural Language Models.&rdquo; OpenAI, 2020. <a href="https://arxiv.org/abs/2001.08361">arXiv:2001.08361</a></span>
+        </div>
+        <div class="note" id="note-6">
+          <span class="note-n">6</span>
+          <span>Hoffmann, J. et al. &ldquo;Training Compute-Optimal Large Language Models.&rdquo; DeepMind, 2022 &mdash; the Chinchilla result. <a href="https://arxiv.org/abs/2203.15556">arXiv:2203.15556</a></span>
+        </div>
+      </div>
+    </section>
+
+  </article>
+
+  <!-- ============ STANDARDS ============ -->
+
+  <section class="section">
+    <div class="section-head col">
+      <p class="kicker">Berkeley Technology Review &middot; first draft</p>
+      <h2>Editorial standards</h2>
+    </div>
+
+    <p class="pullquote">We do the best work in this domain of anybody.</p>
+
+    <div class="prose">
+      <p>We mix boots-on-the-ground investigative journalism &mdash; primary sources &mdash; with deep technical knowledge and data-driven analysis, from cleaned, verified, publicly available pipelines, distilled and presented beautifully. We want to attract the best minds in journalism, finance and technology to help support this mission. It is all pro bono.</p>
+    </div>
+
+    <dl class="standards">
+      <div class="standard">
+        <dt>Origination</dt>
+        <dd>What we cover is arbitrary, and is decided by authors who follow the frontier.</dd>
+      </div>
+      <div class="standard">
+        <dt>Accuracy</dt>
+        <dd>Everything in a report is factually accurate and cited.</dd>
+      </div>
+      <div class="standard">
+        <dt>Frontier</dt>
+        <dd>We commit to covering, in some capacity, developments that happen on the frontier &mdash; which we define, arbitrarily, as within the last week.</dd>
+      </div>
+      <div class="standard">
+        <dt>Authorship</dt>
+        <dd>Research with AI is fine. We commit to writing and reviewing every word by hand.</dd>
+      </div>
+      <div class="standard">
+        <dt>Audience</dt>
+        <dd>Our readers are individuals seeking to know more about what we cover. The writing should not contain overt jargon, and the thesis should be legible to the general public. We accept the friction of accurately distilling complex technologies for non-technical audiences.</dd>
+      </div>
+      <div class="standard">
+        <dt>Presentation</dt>
+        <dd>Every report produces an entry on this site, with relevant and visually appealing graphics and a cited whitepaper. The presentation should itself be on the frontier.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <footer class="page-foot">
+    <p class="caption">Berkeley Technology Review &middot; Report 01 &middot; Working draft, sections 1&ndash;2</p>
+    <p class="caption">Jack Tianxi Yang &middot; Zachary Cameron Golik</p>
+  </footer>
+
+</div>
+</body>
+</html>
